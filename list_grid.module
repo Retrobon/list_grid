@@ -47,25 +47,27 @@ function list_grid_theme(): array {
  * @param array $args
  */
 function list_grid_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+  /** @var \Drupal\list_grid\ListGridService $gridList */
   $gridList = Drupal::service('list_grid')->data();
-  if ($view->id() == $gridList[0]) {
-    $view->setDisplay($gridList[1]);
-    $options = [
-      'id' => 'entity_block',
-      'table' => 'views',
-      'field' => 'entity_block',
-      'relationship' => 'none',
-      'group_type' => 'none',
-      'admin_label' => '',
-      'empty' => TRUE,
-      'tokenize' => TRUE,
-      'target' => 'listgridblock',
-      'view_mode' => 'default',
-      'bypass_access' => FALSE,
-      'plugin_id' => 'entity',
-    ];
-    $view->setHandler($gridList[1], 'header', 'entity_block', $options);
-  }
+  kint($gridList);
+//  if ($view->id() == $gridList[0] ) {
+//    $view->setDisplay($gridList[1]);
+//    $options = [
+//      'id' => 'entity_block',
+//      'table' => 'views',
+//      'field' => 'entity_block',
+//      'relationship' => 'none',
+//      'group_type' => 'none',
+//      'admin_label' => '',
+//      'empty' => TRUE,
+//      'tokenize' => TRUE,
+//      'target' => 'listgridblock',
+//      'view_mode' => 'default',
+//      'bypass_access' => FALSE,
+//      'plugin_id' => 'entity',
+//    ];
+//    $view->setHandler($gridList[1], 'header', 'entity_block', $options);
+//  }
 
 }
 //

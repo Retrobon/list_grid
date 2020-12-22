@@ -3,4 +3,4 @@ parameters:
 services:
   list_grid:
     class: Drupal\list_grid\ListGridService
-    arguments: ['@tempstore.private']
+    arguments: ['@tempstore.private','@config.factory']
