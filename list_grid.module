@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Contains list_grid.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_help().
+ */
+function list_grid_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the list_grid module.
+    case 'help.page.list_grid':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('My Awesome Module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function list_grid_theme() {
+  return [
+    'list_grid' => [
+      'render element' => 'children',
+    ],
+  ];
+}
+
+function list_grid_views_pre_render(ViewExecutable $view) {
+//  kint($view->chooseDisplay());
+  kint($view->getDisplay());
+
+  $config = \Drupal::config('list_grid.listgrid');
+kint($config);
+}
+

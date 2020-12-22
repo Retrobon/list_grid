@@ -1,0 +1,9 @@
+list_grid.list_grid_form:
+  path: '/admin/config/list_grid/listgrid'
+  defaults:
+    _form: '\Drupal\list_grid\Form\ListGridForm'
+    _title: 'ListGridForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

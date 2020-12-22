@@ -1,0 +1,6 @@
+list_grid.list_grid_form:
+  title: 'ListGridForm'
+  route_name: list_grid.list_grid_form
+  description: 'A description for the menu entry'
+  parent: system.admin_config_system
+  weight: 99
