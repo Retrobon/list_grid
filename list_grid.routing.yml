@@ -7,3 +7,19 @@ list_grid.list_grid_form:
     _permission: 'access administration pages'
   options:
     _admin_route: TRUE
+
+list_grid.grid:
+  path: '/views/grid'
+  defaults:
+    _controller: '\Drupal\list_grid\Controller\ListGridController::grid'
+    _title: ''
+  requirements:
+    _permission: 'access content'
+
+list_grid.row:
+  path: '/views/list'
+  defaults:
+    _controller: '\Drupal\list_grid\Controller\ListGridController::list'
+    _title: ''
+  requirements:
+    _permission: 'access content'

@@ -27,19 +27,61 @@ function list_grid_help($route_name, RouteMatchInterface $route_match) {
 /**
  * Implements hook_theme().
  */
-function list_grid_theme() {
+function list_grid_theme(): array {
   return [
     'list_grid' => [
+      'variables' => [
+        'content' => NULL,
+        'links' => NULL
+      ],
       'render element' => 'children',
     ],
   ];
 }
 
-function list_grid_views_pre_render(ViewExecutable $view) {
-//  kint($view->chooseDisplay());
-  kint($view->getDisplay());
+/**
+ * Implements hook_views_pre_view().
+ *
+ * @param \Drupal\views\ViewExecutable $view
+ * @param $display_id
+ * @param array $args
+ */
+function list_grid_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+  $gridList = Drupal::service('list_grid')->data();
+  if ($view->id() == $gridList[0]) {
+    $view->setDisplay($gridList[1]);
+    $options = array(
+      'id' => 'entity_block',
+      'table' => 'views',
+      'field' => 'entity_block',
+      'relationship' => 'none',
+      'group_type' => 'none',
+      'admin_label' => '',
+      'empty' => TRUE,
+      'tokenize' => true,
+      'target' => 'listgridblock',
+      'view_mode' => 'default',
+      'bypass_access' => false,
+      'plugin_id' => 'entity',
+    );
+    $view->setHandler($gridList[1], 'header', 'entity_block', $options);
+//    kint($view);
+  }
 
-  $config = \Drupal::config('list_grid.listgrid');
-kint($config);
 }
+//
+//      header:
+//        entity_block:
+//          id: entity_block
+//          table: views
+//          field: entity_block
+//          relationship: none
+//          group_type: group
+//          admin_label: ''
+//          empty: false
+//          tokenize: true
+//          target: niodnogotovaranenaydeno
+//          view_mode: default
+//          bypass_access: false
+//          plugin_id: entity
 
