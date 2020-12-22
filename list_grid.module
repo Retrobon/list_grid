@@ -32,7 +32,7 @@ function list_grid_theme(): array {
     'list_grid' => [
       'variables' => [
         'content' => NULL,
-        'links' => NULL
+        'links' => NULL,
       ],
       'render element' => 'children',
     ],
@@ -50,7 +50,7 @@ function list_grid_views_pre_view(ViewExecutable $view, $display_id, array &$arg
   $gridList = Drupal::service('list_grid')->data();
   if ($view->id() == $gridList[0]) {
     $view->setDisplay($gridList[1]);
-    $options = array(
+    $options = [
       'id' => 'entity_block',
       'table' => 'views',
       'field' => 'entity_block',
@@ -58,30 +58,46 @@ function list_grid_views_pre_view(ViewExecutable $view, $display_id, array &$arg
       'group_type' => 'none',
       'admin_label' => '',
       'empty' => TRUE,
-      'tokenize' => true,
+      'tokenize' => TRUE,
       'target' => 'listgridblock',
       'view_mode' => 'default',
-      'bypass_access' => false,
+      'bypass_access' => FALSE,
       'plugin_id' => 'entity',
-    );
+    ];
     $view->setHandler($gridList[1], 'header', 'entity_block', $options);
-//    kint($view);
   }
 
 }
 //
-//      header:
-//        entity_block:
-//          id: entity_block
-//          table: views
-//          field: entity_block
-//          relationship: none
-//          group_type: group
-//          admin_label: ''
-//          empty: false
-//          tokenize: true
-//          target: niodnogotovaranenaydeno
-//          view_mode: default
-//          bypass_access: false
-//          plugin_id: entity
-
+///**
+// * Implements hook_install().
+// */
+//function list_grid_install() {
+//
+//  $block_content = BlockContent::create([
+//    'type' => 'basic',
+//    'info' => 'Demo Block',
+//  ]);
+//  $block_content->set('body', 'This is demo block for drupal 8');
+//  $block_content->save();
+//
+//  $block = Block::create([
+//    'id' => 'default_demo_block',
+//    'plugin' => 'block_content:' . $block_content->uuid(),
+//    'region' => 'content',
+//    'provider' => 'block_content',
+//    'weight' => -100,
+//    'theme' => \Drupal::config('system.theme')->get('default'),
+//    'visibility' => [
+//      'request_path' => [
+//        'id' => 'request_path',
+//        'pages' => '/demopage'
+//      ]
+//    ],
+//    'settings' => [
+//      'label' => 'Demo Block',
+//      'label_display' => 'visible',
+//    ],
+//  ]);
+//  $block->save();
+//}
